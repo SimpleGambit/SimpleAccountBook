@@ -1,0 +1,67 @@
+﻿<Window x:Class="SimpleAccountBook.TestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:SimpleAccountBook.Converters"
+        mc:Ignorable="d"
+        Title="테스트 윈도우" Height="450" Width="800">
+    <Window.Resources>
+        <converters:DaySummaryConverter x:Key="DaySummaryConverter" />
+    </Window.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" FontSize="16" FontWeight="Bold" Margin="0,0,0,10">
+            달력 디버깅 테스트
+        </TextBlock>
+        
+        <Calendar Grid.Row="1" 
+                  x:Name="TestCalendar"
+                  SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                  DisplayDate="{Binding CurrentMonth, Mode=TwoWay}">
+            <Calendar.CalendarDayButtonStyle>
+                <Style TargetType="CalendarDayButton">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="CalendarDayButton">
+                                <Border Background="LightGray" 
+                                        BorderBrush="Gray" 
+                                        BorderThickness="1" 
+                                        Margin="1">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <!-- 날짜 표시 -->
+                                        <TextBlock Grid.Row="0" 
+                                                   Text="{TemplateBinding Content}" 
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="Bold"/>
+                                        
+                                        <!-- 테스트 텍스트 -->
+                                        <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                                            <TextBlock Text="TEST" 
+                                                       Foreground="Green" 
+                                                       FontSize="10"
+                                                       HorizontalAlignment="Center"/>
+                                            <TextBlock Text="123" 
+                                                       Foreground="Red" 
+                                                       FontSize="10"
+                                                       HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Calendar.CalendarDayButtonStyle>
+        </Calendar>
+    </Grid>
+</Window>
